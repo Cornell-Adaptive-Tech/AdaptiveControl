@@ -17,6 +17,6 @@ setup(
     description="A framework for allowing serial control of the host device..",
     long_description=readme(),
     long_description_content_type="text/markdown",
-    version="2.1",
+    version="0.2",
     packages=find_packages(),
 )
