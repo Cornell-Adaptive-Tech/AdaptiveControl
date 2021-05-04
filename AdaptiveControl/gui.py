@@ -1,23 +1,23 @@
 import tkinter as tk
+from typing import Iterable
+
 import bluetooth as BT
-import sys
 
 
 class GUI(tk.Frame):
-    def __init__(self, root = None):
+    def __init__(self, root=None):
         super().__init__(root)
         self.root = root
         self.pack()
         self.create_widgets()
 
-
     def create_widgets(self):
         # My stubbornness for list comprehensions has led to messy code.
         # Woe is me
-        device_options = [
+        device_options: list = [
             tk.Button(self, text=device.name, command=self.choose(device))
-                for device in BT.get_serial_devices()
-            ]
+            for device in BT.get_serial_devices()
+        ]
         device_options.insert(0, tk.Label(self, text=''))
         for i, option in enumerate(device_options):
             option.grid(row=i, column=0)
@@ -29,6 +29,8 @@ class GUI(tk.Frame):
             # self.root.withdraw()
             BT.listen(device.name)
             # self.root.deiconify()
+
         return _choose
+
     def screen_size(self):
         return self.root.winfo_screenwidth(), self.root.winfo_screenheight()
